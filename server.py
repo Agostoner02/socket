@@ -6,7 +6,7 @@ SERVER_ADDRESS = '127.0.0.1'
 #numero di porta, deve essere >1024 perchè le altre sono riservate
 SERVER_PORT = 22224
 
-#la funzione avva_server crea un endpoint di ascolto(sock:list) dal quale accettare cinnessioni in entrata
+#la funzione avva_server crea un endpoint di ascolto(sock_list) dal quale accettare cinnessioni in entrata
 #la socket di ascolto viene passata alla funzione ricevi_comandi la quale accetta richieste di connessione
 #e per ognuno crea una socket per i dati(sock_service) da cui ricevere le richieste e inviare le risposte
 
