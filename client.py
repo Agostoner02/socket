@@ -1,15 +1,11 @@
 #!/usr/bin/env python3
 
 import socket
-#lasciando il campo vuoto sarebbe la stessa cosa(localhost)
+
 SERVER_ADDRESS = '127.0.0.1'
-#numero di porta, deve essere >1024 perchè le altre sono riservate
 SERVER_PORT = 22224
 
-#la funzione avva_server crea un endpoint di ascolto(sock:list) dal quale accettare cinnessioni in entrata
-#la socket di ascolto viene passata alla funzione ricevi_comandi la quale accetta richieste di connessione
-#e per ognuno crea una socket per i dati(sock_service) da cui ricevere le richieste e inviare le risposte
-
+#la funzione riceve la socket connessa al server e la utilizza per richiedere il servizio
 def inviaComandi(socket):
     while True:
         try:
@@ -40,7 +36,7 @@ def inviaComandi(socket):
         print("Ricevuto dal server:")
         print(dati + '\n')
 
-
+#la funzione crea una socket (s) per la connessione con il server e la passa alla funzione invia_comandi(s)
 def connessioneServer(address, port):
     sock_service = socket.socket()
     sock_service.connect((address, port))
@@ -51,3 +47,7 @@ def connessioneServer(address, port):
 
 if __name__ == "__main__":
     connessioneServer(SERVER_ADDRESS, SERVER_PORT)
+
+    #if __name__ == '__main__': consente al nostro codice di capire se stia venendo eseguito come script a se stante,
+    #o se è invece stato richiamato come modulo da un qualche programma per usare una o più delle sua varie
+    #funzioni e classi
