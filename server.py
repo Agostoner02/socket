@@ -22,7 +22,7 @@ def riceviComandi(socket):
             if not dati:
                 print("Fine dati dal client. Reset")
                 break
-
+            #decodifica i byte ricevuti in una stringa unicode
             dati = dati.decode()
             print("Ricevuto: '%s'" % dati)
             if dati == '0':
@@ -75,9 +75,14 @@ def ricevi_connessioni(socket_listen):
             sock_listen.close()
             
 def avviaServer(address, port):
+    #crea la socket
     sock_listen = socket.socket()
+    #opzionale: permette di riavviare subito il codice, altrimenti
+    #bisognerebbe aspettare 2-4min prima di poter riutilizzare(bindare)
     sock_listen.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    #associa indirizzo e porta. Nota che l'argomento è una tupla:
     sock_listen.bind((address, port))
+    #imposta quante connessioni pendenti possono essere accodate
     sock_listen.listen(5)
     print("Server in ascolto su %s." % str((address, port)))
 
