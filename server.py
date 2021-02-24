@@ -62,8 +62,18 @@ def riceviComandi(socket):
 
             sock_service.send(risposta)
         sock_service.close()
-
-
+        
+def ricevi_connessioni(socket_listen):
+    while True:
+        socket_service, addr_client = sock_listen.accept()
+        print("\nConnessione ricevuta da %s" % str(addr_client))
+        print("Creo un thread per servire le richieste")
+        try:
+            Thread(target=riceviComandi, args=(sock_service, addr_client)).start()
+        except:
+            print("Il thread non si avvia")
+            sock_listen.close()
+            
 def avviaServer(address, port):
     sock_listen = socket.socket()
     sock_listen.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
